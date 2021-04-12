@@ -57,10 +57,7 @@ public class base extends SQLiteOpenHelper {
                 valores.put(tabelas.tca.COLUMN_NAME_ID, id);
                 valores.put(tabelas.tca.COLUMN_NAME_LAT, lat);
                 valores.put(tabelas.tca.COLUMN_NAME_LON, lon);
-
-
                 db.insert(tabelas.tca.TABLE_NAME, null, valores);
-
             }
             Log.d(TAG, "tca localizacoes inseridos na base de dados");
            tcax=true;

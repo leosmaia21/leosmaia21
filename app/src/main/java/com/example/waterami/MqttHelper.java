@@ -39,7 +39,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MqttHelper {
     public MqttAndroidClient mqttAndroidClient;
-    public int conectado=0;
+    public boolean conectado=false;
     final String serverUri = "tcp://broker.hivemq.com:1883";
 
     final String clientId = "ExampleAndroidClient";
@@ -97,13 +97,13 @@ public class MqttHelper {
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
-                    conectado=1;
+                    conectado=true;
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.w("Mqtt", "Failed to connect to: " + serverUri + exception.toString());
-                    conectado=0;
+                    conectado=false;
                 }
             });
 

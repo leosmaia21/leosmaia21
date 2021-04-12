@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 mqttHelper.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
                     @Override
                     public void connectComplete(boolean b, String s) {
+                        Log.w("connectado!!!!  ", s);
                     }
                     @Override
                     public void connectionLost(Throwable throwable) {
