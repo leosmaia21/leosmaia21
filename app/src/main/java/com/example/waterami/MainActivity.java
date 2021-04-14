@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 mqttHelper.subscribeToTopic("home/water/login_out");
-                mqttHelper.publish("home/water/login_in", "select * from users where username='"+username.getText().toString()+"' and password='"+password.getText().toString()+"'");
+                mqttHelper.publish("home/water/login_in", "select * from user where username='"+username.getText().toString()+"' and password='"+password.getText().toString()+"'");
 
                 mqttHelper.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
                     @Override
