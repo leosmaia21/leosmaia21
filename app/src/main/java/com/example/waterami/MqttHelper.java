@@ -100,6 +100,7 @@ public class MqttHelper {
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
                     conectado=true;
+                    Log.w("Mqtt", ": conectado com sucesso " );
                 }
 
                 @Override
