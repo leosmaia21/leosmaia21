@@ -48,16 +48,20 @@ public class MainActivity extends AppCompatActivity {
         String user = "1";
         String pass = "1";
 
-        mqttHelper = new MqttHelper(getApplicationContext());
-        mqttHelper.connect();
+        Intent mymqttservice_intent = new Intent(this, Mqttservice.class);
+        startService(mymqttservice_intent);
+
+        //mqttHelper = new MqttHelper(getApplicationContext());
+
+        //mqttHelper.connect();
         base base = new base(MainActivity.this);
         base.clearDatabase("tca");
 
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                mqttHelper.subscribeToTopic("home/water/login_out");
-                mqttHelper.publish("home/water/login_in", "select * from user where username='"+username.getText().toString()+"' and password='"+password.getText().toString()+"'");
+
+               mqttHelper.publish("home/water/login_in", "select * from user where username='"+username.getText().toString()+"' and password='"+password.getText().toString()+"'");
 
                 mqttHelper.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
                     @Override
