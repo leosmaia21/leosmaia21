@@ -21,14 +21,15 @@ public class menu extends AppCompatActivity {
     private static final String TAG = "menu";
     private static final int ERROR_DIALOG_REQUEST = 9001;
     MqttHelper mqttHelper;
+    Mqttservice mqtt;
     base base;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         getSupportActionBar().hide();
-        mqttHelper = new MqttHelper(getApplicationContext());
-        mqttHelper.connect();
+//        mqttHelper = new MqttHelper(getApplicationContext());
+//        mqttHelper.connect();
         base =new base(menu.this);
 
         if(isServicesOK()){
@@ -42,26 +43,26 @@ public class menu extends AppCompatActivity {
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mqttHelper.subscribeToTopic("home/water/out");
-                mqttHelper.publish("home/water/in","select * from tca");
-                mqttHelper.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
-                    @Override
-                    public void connectComplete(boolean b, String s) {
-                    }
-                    @Override
-                    public void connectionLost(Throwable throwable) {
-                    }
-                    @Override
-                    public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                        base.d_tca(mqttMessage.toString());
-                        Log.w("login login", mqttMessage.toString());
-                        Intent intent = new Intent(menu.this, mapa.class);
-                        startActivity(intent);
-                    }
-                    @Override
-                    public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-                    }
-                });
+                //mqttHelper.subscribeToTopic("home/water/out",2);
+                mqtt.publish1("home/water/in","select * from tca");
+//                mqttHelper.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
+//                    @Override
+//                    public void connectComplete(boolean b, String s) {
+//                    }
+//                    @Override
+//                    public void connectionLost(Throwable throwable) {
+//                    }
+//                    @Override
+//                    public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+//                        base.d_tca(mqttMessage.toString());
+//                        Log.w("login login", mqttMessage.toString());
+//                        Intent intent = new Intent(menu.this, mapa.class);
+//                        startActivity(intent);
+//                    }
+//                    @Override
+//                    public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
+//                    }
+//                });
 
             }
         });

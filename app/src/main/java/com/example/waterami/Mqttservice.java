@@ -27,6 +27,9 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttSecurityException;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
+
 
 public class Mqttservice extends Service {
     private String ip = "waterami.duckdns.org", port = "1883";
@@ -122,6 +125,22 @@ public class Mqttservice extends Service {
 
         } catch (MqttException e) {
             e.printStackTrace();
+        }
+
+    }
+    public void publish1(String topic, String info) {
+
+        byte[] encodedInfo;
+        try {
+            encodedInfo = info.getBytes(StandardCharsets.UTF_8);
+            MqttMessage message = new MqttMessage(encodedInfo);
+            mqttClient.publish(topic, message);
+            Log.e("Mqtt", "publish done");
+        } catch (MqttException e) {
+            e.printStackTrace();
+            Log.e("Mqtt", Objects.requireNonNull(e.getMessage()));
+        } catch (Exception e) {
+            Log.e("Mqtt", "general exception " + e.getMessage());
         }
 
     }

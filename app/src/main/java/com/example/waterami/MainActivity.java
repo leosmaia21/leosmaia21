@@ -28,7 +28,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MainActivity extends AppCompatActivity {
     MqttHelper mqttHelper;
-
+    Mqttservice mqtt;
     private Context context;
     private IMqttActionListener listener;
     boolean verificacao;
@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
         String user = "1";
         String pass = "1";
 
-        Intent mymqttservice_intent = new Intent(this, Mqttservice.class);
-        startService(mymqttservice_intent);
+       // Intent mymqttservice_intent = new Intent(this, Mqttservice.class);
+        //startService(mymqttservice_intent);
 
-        //mqttHelper = new MqttHelper(getApplicationContext());
-
-        //mqttHelper.connect();
+        mqttHelper = new MqttHelper(getApplicationContext());
+        //mqtt= new Mqttservice();
+        mqttHelper.connect();
         base base = new base(MainActivity.this);
         base.clearDatabase("tca");
 
@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-               mqttHelper.publish("home/water/login_in", "select * from user where username='"+username.getText().toString()+"' and password='"+password.getText().toString()+"'");
-
+               mqttHelper.publish("home/water/login_in", "select * from users where username='"+username.getText().toString()+"' and password='"+password.getText().toString()+"'");
+               mqttHelper.subscribeToTopic("home/water/login_out",2);
                 mqttHelper.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
                     @Override
                     public void connectComplete(boolean b, String s) {
@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
                             verificacao=true;
                             Intent intent = new Intent(getApplicationContext(), menu.class);
                             startActivity(intent);
-                            Toast toast = Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT);
-                            toast.show();
+                           Toast.makeText(context, "Login successful", Toast.LENGTH_LONG).show();
+                            //toast.show();
                         }
                         if(mqttMessage.toString().equals("errado")){
                             verificacao=false;
