@@ -45,8 +45,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
-public class mapa extends AppCompatActivity
-        implements OnMapReadyCallback {
+public class mapa extends AppCompatActivity implements OnMapReadyCallback {
 
     GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
@@ -62,8 +61,6 @@ public class mapa extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
         getSupportActionBar().hide();
-        //getSupportActionBar().setTitle("Map Location Activity");
-
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -87,7 +84,7 @@ public class mapa extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        //mGoogleMap.setMapType(GoogleMap.MAP_TYPE_ROADMAP);
+
 
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(120000); // two minute interval
@@ -105,24 +102,24 @@ public class mapa extends AppCompatActivity
                 //Request Location Permission
                 checkLocationPermission();
             }
-        }
-        else {
+        } else {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
             mGoogleMap.setMyLocationEnabled(true);
         }
 
 
-        for(int i=0;i<tca.length;i++){
+        for (int i = 0; i < tca.length; i++) {
 
             googleMap.addMarker(
                     new MarkerOptions()
                             .position(tca[i])
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_tca)));
         }
-//
-
-
     }
+
+
+
+
 
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
@@ -136,14 +133,16 @@ public class mapa extends AppCompatActivity
                 if (mCurrLocationMarker != null) {
                     mCurrLocationMarker.remove();
                 }
-
+                Context context = getApplicationContext();
+                Toast toast = Toast.makeText(context, "mapa a funcionar", Toast.LENGTH_SHORT);
+                toast.show();
                 //Place current location marker
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                /*MarkerOptions markerOptions = new MarkerOptions();
+                MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.title("Current Position");
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-                mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);*/
+                mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
 
                 //move map camera
 
@@ -167,14 +166,11 @@ public class mapa extends AppCompatActivity
                 new AlertDialog.Builder(this)
                         .setTitle("Location Permission Needed")
                         .setMessage("This app needs the Location permission, please accept to use location functionality")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(mapa.this,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_LOCATION );
-                            }
+                        .setPositiveButton("OK", (dialogInterface, i) -> {
+                            //Prompt the user once explanation has been shown
+                            ActivityCompat.requestPermissions(mapa.this,
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                    MY_PERMISSIONS_REQUEST_LOCATION );
                         })
                         .create()
                         .show();

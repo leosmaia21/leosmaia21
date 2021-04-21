@@ -45,7 +45,7 @@ public class MqttHelper {
     //final String clientId = "ExampleAndroidClient";
     String clientId = MqttClient.generateClientId();
     //String id=Mqtt
-    final String subscriptionTopic = "sensor/+";
+
 
     final String username = "waterami";
     final String password = "waterami";
