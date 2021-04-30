@@ -30,6 +30,7 @@ public class menu extends AppCompatActivity {
         getSupportActionBar().hide();
           mqttHelper = new MqttHelper(getApplicationContext());
           mqttHelper.connect();
+
         base =new base(menu.this);
 
         if(isServicesOK()){

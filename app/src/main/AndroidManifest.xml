@@ -44,15 +44,11 @@
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
 
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-        <dependency>
-            <groupId>com.github.PhilJay</groupId>
-            <artifactId>MPAndroidChart</artifactId>
-            <version>v3.1.0</version>
-        </dependency>
+<!--        <repository>-->
+<!--            <id>jitpack.io</id>-->
+<!--            <url>https://jitpack.io</url>-->
+<!--        </repository>-->
+
     </application>
 
 </manifest>
