@@ -21,13 +21,14 @@ public class menu extends AppCompatActivity {
     private static final String TAG = "menu";
     private static final int ERROR_DIALOG_REQUEST = 9001;
     MqttHelper mqttHelper;
-    //Mqttservice mqtt;
+    //Mqttservice m qtt;
     base base;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         getSupportActionBar().hide();
+        Button update = (Button) findViewById(R.id.update);
           mqttHelper = new MqttHelper(getApplicationContext());
           mqttHelper.connect();
 
@@ -36,7 +37,13 @@ public class menu extends AppCompatActivity {
         if(isServicesOK()){
             mapa();
         }
-
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(menu.this, tecnico.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void mapa(){

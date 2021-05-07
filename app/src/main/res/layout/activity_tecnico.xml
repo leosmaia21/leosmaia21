@@ -6,35 +6,156 @@
     android:layout_height="match_parent"
     tools:context=".tecnico">
 
+
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="385dp"
-        tools:layout_editor_absoluteY="252dp">
+        android:layout_width="491dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
 
             <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
-        </LinearLayout>
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="Local"
+                android:textSize="25sp" />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/local_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="28dp" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Número Série Contador"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/local_text5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:inputType="numberPassword" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="28dp" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="ID MWMT"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/local_text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberPassword" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="28dp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="Leitura"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/local_text3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberPassword" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="28dp" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="Multiplicador"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/local_text4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberPassword" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="28dp" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="Data e Hora"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/editTextDate2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:textSize="30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.038" />
+
+    <Button
+        android:id="@+id/submeter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submeter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.877"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
 </androidx.constraintlayout.widget.ConstraintLayout>
