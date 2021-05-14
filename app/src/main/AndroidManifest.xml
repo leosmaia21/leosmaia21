@@ -43,6 +43,10 @@
         </activity>
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
+        <service android:name=".Mqttservice"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
 
 <!--        <repository>-->
 <!--            <id>jitpack.io</id>-->

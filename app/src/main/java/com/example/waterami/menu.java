@@ -2,11 +2,17 @@ package com.example.waterami;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -20,8 +26,10 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class menu extends AppCompatActivity {
     private static final String TAG = "menu";
     private static final int ERROR_DIALOG_REQUEST = 9001;
+    private static final String[] areas= new String[]{"Aveiro","Figueira da foz","Porto","Lisboa"};
     MqttHelper mqttHelper;
-    //Mqttservice m qtt;
+    private Context context;
+
     base base;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +42,6 @@ public class menu extends AppCompatActivity {
 
         base =new base(menu.this);
 
-        if(isServicesOK()){
-            mapa();
-        }
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(menu.this, tecnico.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void mapa(){
         Button map = (Button) findViewById(R.id.map);
         map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,16 +59,106 @@ public class menu extends AppCompatActivity {
                     public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
                         base.d_tca(mqttMessage.toString());
                         Log.w("login login", mqttMessage.toString());
-                        Intent intent = new Intent(menu.this, mapa.class);
-                        startActivity(intent);
+                       /* Intent intent = new Intent(menu.this, mapa.class);
+                        startActivity(intent);*/
                     }
                     @Override
                     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
                     }
                 });
 
+
+                LayoutInflater layoutInflater = LayoutInflater.from(menu.this);
+                View promptView = layoutInflater.inflate(R.layout.selecionar_zona, null);
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(menu.this);
+                alertDialogBuilder.setView(promptView);
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(menu.this,
+                        android.R.layout.simple_dropdown_item_1line, areas);
+                AutoCompleteTextView textView = (AutoCompleteTextView)
+                        promptView.findViewById(R.id.id_text_select);
+                textView.setAdapter(adapter);
+
+                alertDialogBuilder.setCancelable(true)
+                        .setPositiveButton("GO", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            String x=textView.getText().toString();
+                               mqttHelper.publish("teste",x);
+                                 if(isServicesOK()){
+                                     Intent intent = new Intent(menu.this, mapa.class);
+                                     startActivity(intent);
+                                      }
+
+                            }
+
+                        });
+
+                AlertDialog b = alertDialogBuilder.create();
+
+                b.show();
+                b.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.black));
+
             }
         });
+
+
+
+       /* if(isServicesOK()){
+            mapa();
+        }*/
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(menu.this, tecnico.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void mapa(){
+        /*Button map = (Button) findViewById(R.id.map);
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mqttHelper.subscribeToTopic("home/water/out",2);
+                mqttHelper.publish("home/water/in","select * from tca");
+                mqttHelper.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
+                    @Override
+                    public void connectComplete(boolean b, String s) {
+                    }
+                    @Override
+                    public void connectionLost(Throwable throwable) {
+                    }
+                    @Override
+                    public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+                        base.d_tca(mqttMessage.toString());
+                        Log.w("login login", mqttMessage.toString());
+                       *//* Intent intent = new Intent(menu.this, mapa.class);
+                        startActivity(intent);*//*
+                    }
+                    @Override
+                    public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
+                    }
+                });
+                AlertDialog.Builder builder = new AlertDialog.Builder(menu.this);
+               final View customLayout=getLayoutInflater().inflate(R.layout.selecionar_zona,null);
+               builder.setView(customLayout);
+
+               builder.setTitle("Select area");
+              *//* AutoCompleteTextView edittext=findViewById(R.id.id_text_select);
+                ArrayAdapter<String> adapter=new ArrayAdapter<String>(menu.this, android.R.layout.simple_list_item_1,areas);
+                edittext.setAdapter(adapter);*//*
+               builder.setPositiveButton("Go", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialogInterface, int i) {
+
+                   }
+               });
+                return builder.create();
+
+            }
+        });*/
     }
     public boolean isServicesOK(){
         Log.d(TAG, "isServicesOK: checking google services version");

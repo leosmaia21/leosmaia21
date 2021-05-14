@@ -39,14 +39,10 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MqttHelper {
     public MqttAndroidClient mqttAndroidClient;
-    public boolean conectado=false;
+   private int conectado=0;
     final String serverUri = "tcp://waterami.duckdns.org:1883";
 
-    //final String clientId = "ExampleAndroidClient";
     String clientId = MqttClient.generateClientId();
-    //String id=Mqtt
-
-
     final String username = "waterami";
     final String password = "waterami";
 
@@ -99,14 +95,14 @@ public class MqttHelper {
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
-                    conectado=true;
+                    conectado=1;
                     Log.w("Mqtt", ": conectado com sucesso " );
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.w("Mqtt", "Failed to connect to: " + serverUri + exception.toString());
-                    conectado=false;
+                    conectado=0;
                 }
             });
 
@@ -115,7 +111,9 @@ public class MqttHelper {
             ex.printStackTrace();
         }
     }
-
+    public int getConectado(){
+        return conectado;
+    }
 
     public void subscribeToTopic(String topico,int q) {
         try {

@@ -14,6 +14,7 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -45,17 +46,19 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText username = findViewById(R.id.email);
         final EditText password = findViewById(R.id.password);
-        String user = "1";
-        String pass = "1";
 
-       // Intent mymqttservice_intent = new Intent(this, Mqttservice.class);
+
+        //Intent mymqttservice_intent = new Intent(this, Mqttservice.class);
         //startService(mymqttservice_intent);
 
         mqttHelper = new MqttHelper(getApplicationContext());
-        //mqtt= new Mqttservice();
+       // mqtt= new Mqttservice();
         mqttHelper.connect();
+       
+
         base base = new base(MainActivity.this);
         base.clearDatabase("tca");
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

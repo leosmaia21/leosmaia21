@@ -51,7 +51,6 @@
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/purple_500"
         android:backgroundTint="@color/black"
         android:foregroundTint="#953C3C"
         android:text="Login"
