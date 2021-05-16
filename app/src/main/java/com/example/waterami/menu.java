@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -75,16 +76,17 @@ public class menu extends AppCompatActivity {
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(menu.this,
                         android.R.layout.simple_dropdown_item_1line, areas);
-                AutoCompleteTextView textView = (AutoCompleteTextView)
+                MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)
                         promptView.findViewById(R.id.id_text_select);
                 textView.setAdapter(adapter);
-
+                textView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
                 alertDialogBuilder.setCancelable(true)
                         .setPositiveButton("GO", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
                             String x=textView.getText().toString();
-                               mqttHelper.publish("teste",x);
+                            String[] zonas_selecionas=x.split("\\s*,\\s*");
+                               mqttHelper.publish("teste",zonas_selecionas[zonas_selecionas.length-1]);
                                  if(isServicesOK()){
                                      Intent intent = new Intent(menu.this, mapa.class);
                                      startActivity(intent);
