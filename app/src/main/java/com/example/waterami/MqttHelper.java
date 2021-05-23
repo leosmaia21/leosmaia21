@@ -40,7 +40,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class MqttHelper {
     public MqttAndroidClient mqttAndroidClient;
    private int conectado=0;
-    final String serverUri = "tcp://waterami.duckdns.org:1883";
+    final String serverUri = "tcp://broker.hivemq.com:1883";
 
     String clientId = MqttClient.generateClientId();
     final String username = "waterami";
@@ -80,8 +80,8 @@ public class MqttHelper {
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
-        mqttConnectOptions.setUserName(username);
-        mqttConnectOptions.setPassword(password.toCharArray());
+       // mqttConnectOptions.setUserName(username);
+        //mqttConnectOptions.setPassword(password.toCharArray());
 
         try {
 
