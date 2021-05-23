@@ -18,7 +18,7 @@ import java.io.IOException;
 public class base extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "dados5.db";
+    private static final String DATABASE_NAME = "dados6.db";
     private static final String TAG = base.class.getSimpleName();
     Cursor c = null;
     SQLiteDatabase db;
@@ -31,7 +31,7 @@ public class base extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE "+ tabelas.tca.TABLE_NAME+"("+ tabelas.tca.COLUMN_NAME_ID+" integer not null unique primary key, "+ tabelas.tca.COLUMN_NAME_LAT+" FLOAT NOT NULL,"+ tabelas.tca.COLUMN_NAME_LON+" FLOAT NOT NULL);");
+        db.execSQL("CREATE TABLE "+ tabelas.tca.TABLE_NAME+"("+ tabelas.tca.COLUMN_NAME_ID+" integer not null unique primary key, "+ tabelas.tca.COLUMN_NAME_LAT+" double NOT NULL,"+ tabelas.tca.COLUMN_NAME_LON+" double NOT NULL);");
         db.execSQL("CREATE TABLE "+ tabelas.pgc.TABLE_NAME+"("+ tabelas.pgc.COLUMN_NAME_ID+" integer not null unique primary key, "+ tabelas.pgc.COLUMN_NAME_LAT+" FLOAT NOT NULL,"+ tabelas.pgc.COLUMN_NAME_LON+" FLOAT NOT NULL);");
         db.execSQL("create table "+tabelas.agua.TABLE_NAME+"("+tabelas.agua.ID_TCA+" integer not null unique primary key, "+tabelas.agua.TIMESTAMP+ "text not null unique, "+ tabelas.agua.MEDIDA+" float not null);");
     }
@@ -96,7 +96,7 @@ public class base extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
     }
-    public int get_id_tca(float lat,float lon){
+    public int get_id_tca(double lat,double lon){
         Cursor crs = db.rawQuery("select * from tca where lat="+lat+" and lon="+lon,null);
         crs.moveToFirst();
         int x = crs.getInt(crs.getColumnIndex("id"));
@@ -142,7 +142,7 @@ public class base extends SQLiteOpenHelper {
 
         for(int i=0;i<str.length;i++)
         {
-            str[i]=new LatLng(crs.getFloat(crs.getColumnIndex("lat")),crs.getFloat(crs.getColumnIndex("lon"))) ;
+            str[i]=new LatLng(crs.getDouble(crs.getColumnIndex("lat")),crs.getDouble(crs.getColumnIndex("lon"))) ;
             crs.moveToNext();
         }
         crs.moveToLast();

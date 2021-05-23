@@ -110,13 +110,13 @@ public class mapa extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 LatLng pino=marker.getPosition();
-                float lat=(float)pino.latitude;
-                float lon=(float)pino.longitude;
+                double lat= (double)pino.latitude;
+                double lon= (double)pino.longitude;
                 int tca_id=base.get_id_tca(lat,lon);
-                Log.d(TAG, String.valueOf(tca_id));
-                Intent intent = new Intent(getApplicationContext(), about.class);
+                Log.d(TAG, String.valueOf(tca_id)+ "    "+String.valueOf(lat));
+               /* Intent intent = new Intent(getApplicationContext(), about.class);
                 intent.putExtra("id",tca_id);
-                startActivity(intent);
+                startActivity(intent);*/
                 return false;
             }
         });
