@@ -3,11 +3,8 @@ package com.example.waterami;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,18 +12,12 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
@@ -34,14 +25,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
@@ -53,9 +40,10 @@ public class mapa extends AppCompatActivity implements OnMapReadyCallback {
     Location mLastLocation;
     Marker mCurrLocationMarker;
     FusedLocationProviderClient mFusedLocationClient;
-
+    Context context;
     LatLng[] tca=null;
-
+    base base;
+    private static final String TAG = mapa.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +53,7 @@ public class mapa extends AppCompatActivity implements OnMapReadyCallback {
 
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
-        base base=new base(mapa.this);
+        base=new base(mapa.this);
        tca=base.get_tca();
 
 
@@ -112,16 +100,30 @@ public class mapa extends AppCompatActivity implements OnMapReadyCallback {
 
             googleMap.addMarker(
                     new MarkerOptions()
+                            .draggable(false)
                             .position(tca[i])
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_tca)));
         }
+
+
+       mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                LatLng pino=marker.getPosition();
+                float lat=(float)pino.latitude;
+                float lon=(float)pino.longitude;
+                int tca_id=base.get_id_tca(lat,lon);
+                Log.d(TAG, String.valueOf(tca_id));
+                Intent intent = new Intent(getApplicationContext(), about.class);
+                intent.putExtra("id",tca_id);
+                startActivity(intent);
+                return false;
+            }
+        });
     }
 
 
-
-
-
-    LocationCallback mLocationCallback = new LocationCallback() {
+  LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
             List<Location> locationList = locationResult.getLocations();
@@ -138,11 +140,11 @@ public class mapa extends AppCompatActivity implements OnMapReadyCallback {
                 toast.show();
                 //Place current location marker
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                MarkerOptions markerOptions = new MarkerOptions();
+               /* MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.title("Current Position");
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-                mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
+                mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);*/
 
                 //move map camera
 
@@ -217,4 +219,7 @@ public class mapa extends AppCompatActivity implements OnMapReadyCallback {
             // permissions this app might request
         }
     }
+
+
+
 }

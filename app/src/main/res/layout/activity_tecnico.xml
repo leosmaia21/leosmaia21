@@ -8,13 +8,14 @@
 
 
     <ScrollView
-        android:layout_width="388dp"
-        android:layout_height="355dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="465dp"
+        android:layout_height="390dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6">
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -127,11 +128,16 @@
                 android:textSize="25sp" />
 
             <EditText
-                android:id="@+id/editTextDate2"
+                android:id="@+id/id_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="DD/MM/YYYY"
                 android:inputType="date" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="28dp" />
 
         </LinearLayout>
     </ScrollView>
@@ -156,9 +162,9 @@
         android:text="Submeter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.709"
+        app:layout_constraintHorizontal_bias="0.864"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
+        app:layout_constraintVertical_bias="0.912" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

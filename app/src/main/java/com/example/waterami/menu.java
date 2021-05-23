@@ -27,7 +27,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class menu extends AppCompatActivity {
     private static final String TAG = "menu";
     private static final int ERROR_DIALOG_REQUEST = 9001;
-    private static final String[] areas= new String[]{"Aveiro","Figueira da foz","Porto","Lisboa"};
+    private static final String[] areas= new String[]{"Lisboa","Porto","Braga","Setúbal","Aveiro","Leiria","Santarém","Faro","Coimbra","Viseu","Madeira","Açores","Viana do Castelo","Vila Real","Castelo Branco","Guarda","Évora","Beja","Bragança","Portoalegre"};
     MqttHelper mqttHelper;
     private Context context;
 

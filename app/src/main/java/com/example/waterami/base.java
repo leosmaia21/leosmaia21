@@ -96,6 +96,12 @@ public class base extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
     }
+    public int get_id_tca(float lat,float lon){
+        Cursor crs = db.rawQuery("select * from tca where lat="+lat+" and lon="+lon,null);
+        crs.moveToFirst();
+        int x = crs.getInt(crs.getColumnIndex("id"));
+       return x;
+    }
     public void get_agua(String dados){
         try{
             JSONArray jsondata= new JSONArray(dados);
