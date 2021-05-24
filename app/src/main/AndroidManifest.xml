@@ -18,23 +18,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WaterAMI">
-        <activity android:name=".data"></activity>
-        <activity android:name=".tecnico"
-            android:windowSoftInputMode="stateVisible|adjustPan"/>
+        <activity android:name=".grafico"></activity>
+        <activity android:name=".data" />
+        <activity
+            android:name=".tecnico"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity android:name=".teste" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-
             android:value="@string/API_KEY" />
-
 
         <activity android:name=".mapa" />
         <activity android:name=".about" />
         <activity android:name=".menu" />
         <activity
             android:name=".MainActivity"
-
             android:label="@string/app_name"
             android:theme="@style/Theme.WaterAMI.NoActionBar">
             <intent-filter>
@@ -45,16 +44,10 @@
         </activity>
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
-        <service android:name=".Mqttservice"
+        <service
+            android:name=".Mqttservice"
             android:enabled="true"
-            android:exported="true" >
-        </service>
-
-<!--        <repository>-->
-<!--            <id>jitpack.io</id>-->
-<!--            <url>https://jitpack.io</url>-->
-<!--        </repository>-->
-
+            android:exported="true" />
     </application>
 
 </manifest>

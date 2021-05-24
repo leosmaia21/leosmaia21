@@ -43,6 +43,7 @@ public class mapa extends AppCompatActivity implements OnMapReadyCallback {
     Context context;
     LatLng[] tca=null;
     base base;
+
     private static final String TAG = mapa.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {

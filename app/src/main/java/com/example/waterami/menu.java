@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
@@ -42,7 +43,7 @@ public class menu extends AppCompatActivity {
           mqttHelper.connect();
 
         base =new base(menu.this);
-
+        Button data=(Button)findViewById(R.id.data) ;
         Button map = (Button) findViewById(R.id.map);
         map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,12 +104,32 @@ public class menu extends AppCompatActivity {
 
             }
         });
+         data.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(menu.this);
+
+                final View customLayout=getLayoutInflater().inflate(R.layout.grafico_context,null);
+                builder.setView(customLayout);
+                builder.setTitle("Insert tca id");
+
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        EditText id_tca=customLayout.findViewById(R.id.grafico_context);
+                        int id=Integer.parseInt(id_tca.getText().toString());
+                        Intent intent = new Intent(getApplicationContext(), grafico.class);
+                         intent.putExtra("id",id);
+                        startActivity(intent);
+                    }
+
+                });
+                 AlertDialog dialog=builder.create();
+                 dialog.show();
+             }
+         });
 
 
-
-       /* if(isServicesOK()){
-            mapa();
-        }*/
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

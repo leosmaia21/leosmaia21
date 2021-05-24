@@ -2,6 +2,7 @@ package com.example.waterami;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -26,10 +27,13 @@ import java.util.Calendar;
 public class tecnico extends AppCompatActivity {
     private static final String TAG =tecnico.class.getSimpleName(); ;
     EditText data;
+    EditText hora;
     private Context context;
     int day=0;
     int mon=0;
     int year=0;
+    int hour=0;
+    int min=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +43,7 @@ public class tecnico extends AppCompatActivity {
         mqttHelper.connect();
 
         data = findViewById(R.id.id_data);
-
+        hora=findViewById(R.id.id_hora);
         Button submeter=findViewById(R.id.submeter);
         TextView multiplicador = findViewById(R.id.multiplicador_textbox);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
@@ -89,8 +93,6 @@ public class tecnico extends AppCompatActivity {
                     if (clean.length() < 8){
                         clean = clean + ddmmyyyy.substring(clean.length());
                     }else{
-                        //This part makes sure that when we finish entering numbers
-                        //the date is correct, fixing it otherwise
                         day  = Integer.parseInt(clean.substring(0,2));
                         mon  = Integer.parseInt(clean.substring(2,4));
                         year = Integer.parseInt(clean.substring(4,8));
@@ -119,13 +121,13 @@ public class tecnico extends AppCompatActivity {
 
                 }
             }
-
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
             public void afterTextChanged(Editable s) {}
         });
+
+
         submeter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d(TAG, String.valueOf(year));

@@ -135,6 +135,14 @@
                 android:hint="DD/MM/YYYY"
                 android:inputType="date" />
 
+            <EditText
+                android:id="@+id/id_hora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="HH:MM"
+                android:inputType="date" />
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="28dp" />
