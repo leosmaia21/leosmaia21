@@ -46,10 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText username = findViewById(R.id.email);
         final EditText password = findViewById(R.id.password);
-
+        username.getText().clear();
+        password.getText().clear();
 
         //Intent mymqttservice_intent = new Intent(this, Mqttservice.class);
         //startService(mymqttservice_intent);
+
 
         mqttHelper = new MqttHelper(getApplicationContext());
        // mqtt= new Mqttservice();

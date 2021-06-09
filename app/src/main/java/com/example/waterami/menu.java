@@ -117,10 +117,29 @@ public class menu extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         EditText id_tca=customLayout.findViewById(R.id.grafico_context);
-                        int id=Integer.parseInt(id_tca.getText().toString());
-                        Intent intent = new Intent(getApplicationContext(), grafico.class);
-                         intent.putExtra("id",id);
-                        startActivity(intent);
+
+                        mqttHelper.subscribeToTopic("home/water/out",2);
+                        mqttHelper.publish("home/water/in","select * from valores");
+                        mqttHelper.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
+                            @Override
+                            public void connectComplete(boolean b, String s) {
+                            }
+                            @Override
+                            public void connectionLost(Throwable throwable) {
+                            }
+                            @Override
+                            public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+                                base.d_valores(mqttMessage.toString());
+                                Intent intent = new Intent(getApplicationContext(), grafico.class);
+                                startActivity(intent);
+
+                            }
+                            @Override
+                            public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
+                            }
+                        });
+
+
                     }
 
                 });

@@ -26,11 +26,11 @@ public class tabelas {
         public static final String COLUMN_NAME_LAT = "lat";
         public static final String COLUMN_NAME_LON = "lon";
     }
-    public  static  class agua implements  BaseColumns{
-        public static  final String TABLE_NAME="agua";
-        public static final String ID_TCA="id_tca";
-        public static final String TIMESTAMP="timestamp";
-        public static  final String MEDIDA="medida";
+    public static class medidas implements BaseColumns {
+        public static final String TABLE_NAME = "medidas";
+        public static final String COLUMN_NAME_TIMESTAMP = "timestamp";
+        public static final String COLUMN_NAME_MEDIDA = "medida";
     }
+
 
 }

@@ -115,9 +115,9 @@ public class mapa extends AppCompatActivity implements OnMapReadyCallback {
                 double lon= (double)pino.longitude;
                 int tca_id=base.get_id_tca(lat,lon);
                 Log.d(TAG, String.valueOf(tca_id)+ "    "+String.valueOf(lat));
-               /* Intent intent = new Intent(getApplicationContext(), about.class);
+                Intent intent = new Intent(getApplicationContext(), grafico.class);
                 intent.putExtra("id",tca_id);
-                startActivity(intent);*/
+                startActivity(intent);
                 return false;
             }
         });
@@ -220,7 +220,5 @@ public class mapa extends AppCompatActivity implements OnMapReadyCallback {
             // permissions this app might request
         }
     }
-
-
 
 }
